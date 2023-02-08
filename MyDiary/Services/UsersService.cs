@@ -15,5 +15,33 @@ namespace MyDiary.Services{
         }
         public async Task<List<User>> GetAsync() => await _usersCollection.Find(_ => true).ToListAsync();
         public async Task<User?> GetAsync(string id) =>await _usersCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        public async Task<User?> CreateAsync(User korisnik)
+        {
+            await _usersCollection.InsertOneAsync(korisnik);
+            return korisnik;
+        }
+        public async Task<User?> UpdateAsync(User korisnik)
+        {
+            var use=await _usersCollection.Find(x=>x.Id==korisnik.Id).FirstOrDefaultAsync();
+            if(use!=null)
+            {
+                use=korisnik;
+            }
+            if(use!=null)
+                await _usersCollection.ReplaceOneAsync(x=>x.Id==use.Id,korisnik);
+            return use;
+        }
+        public async Task<User?> DeleteAsync(string id)
+        {
+            var use=await _usersCollection.Find(x=>x.Id==id).FirstOrDefaultAsync();
+            if(use!=null)
+            {
+                await _usersCollection.DeleteOneAsync(x=>x.Id==id);
+                return null;
+            }
+            return use;
+
+        }
+    
     }
 }
