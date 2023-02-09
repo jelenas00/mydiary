@@ -3,7 +3,7 @@ using MyDiary.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyDiary.Controllers{
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class PagesController: ControllerBase{
         private readonly UsersService _usersService;
@@ -15,9 +15,13 @@ namespace MyDiary.Controllers{
             _diariesService=diariesService;
             _pagesService=pagesService;
         }
+
+        [Route("GetAllPages")]
         [HttpGet]
         public async Task<List<Page>> Get() =>await _pagesService.GetAsync();
-        [HttpGet("{id}")]
+
+        [Route("GetPageById/{id}")]
+        [HttpGet]
         public async Task<ActionResult<Page>> Get(string id)
         {
             var page = await _pagesService.GetAsync(id);
@@ -29,6 +33,8 @@ namespace MyDiary.Controllers{
 
             return page;
         }
+
+        [Route("CreatePage")]
         [HttpPost]
         public async Task<ActionResult<Page>> CreatePage(Page stranice)
         {
@@ -46,6 +52,8 @@ namespace MyDiary.Controllers{
                 return user;
             }
         }
+
+        [Route("UpdatePage")]
         [HttpPut]
         public async Task<ActionResult<Page>> UpdatePage(Page stranice)
         {
@@ -55,6 +63,8 @@ namespace MyDiary.Controllers{
             else
                 return user;
         }
+
+        [Route("DeletePage/{id}")]
         [HttpDelete]
         public async Task<ActionResult<Page>> DeleteAsync(string id)
         {

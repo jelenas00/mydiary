@@ -3,7 +3,7 @@ using MyDiary.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyDiary.Controllers{
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class DiariesController: ControllerBase{
          private readonly UsersService _usersService;
@@ -15,9 +15,12 @@ namespace MyDiary.Controllers{
             _usersService=usersServices;
             _pagesService=pagesService;
         }
+        [Route("GetAllDiaries")]
         [HttpGet]
         public async Task<List<Diary>> Get() =>await _diariesService.GetAsync();
-        [HttpGet("{id}")]
+        
+        [Route("GetDiaryById/{id}")]
+        [HttpGet]
         public async Task<ActionResult<Diary>> Get(string id)
         {
             var diary = await _diariesService.GetAsync(id);
@@ -29,7 +32,9 @@ namespace MyDiary.Controllers{
 
             return diary;
         }
-                [HttpPost]
+
+        [Route("CreateDiary")]
+        [HttpPost]
         public async Task<ActionResult<Diary>> CreateDiary(Diary dnevnik)
         {
                 var user= await _diariesService.CreateAsync(dnevnik);
@@ -47,6 +52,8 @@ namespace MyDiary.Controllers{
             }
                 
         }
+
+        [Route("UpdateDiary")]
         [HttpPut]
         public async Task<ActionResult<Diary>> UpdateUser(Diary dnevnik)
         {
@@ -56,6 +63,8 @@ namespace MyDiary.Controllers{
             else
                 return user;
         }
+
+        [Route("DeleteDiary/{id}")]
         [HttpDelete]
         public async Task<ActionResult<Diary>> DeleteAsync(string id)
         {
@@ -80,7 +89,7 @@ namespace MyDiary.Controllers{
                 
         }
         [HttpGet]
-        [Route("unlockDiary")]
+        [Route("unlockDiary/{idd}/{pass}")]
         public async Task<ActionResult<Diary>> unlockDiary(string idd,string pass)
         {
             var diary=await _diariesService.GetAsync(idd);

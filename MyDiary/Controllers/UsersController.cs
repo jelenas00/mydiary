@@ -3,7 +3,7 @@ using MyDiary.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyDiary.Controllers{
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class UsersController: ControllerBase{
         private readonly UsersService _usersService;
@@ -15,9 +15,13 @@ namespace MyDiary.Controllers{
             _diariesService=diariesService;
             _pagesService=pagesService;
         }
+
+        [Route("GetAllUsers")]
         [HttpGet]
         public async Task<List<User>> Get() =>await _usersService.GetAsync();
-        [HttpGet("{id}")]
+
+        [Route("GetUserById/{id}")]
+        [HttpGet]
         public async Task<ActionResult<User>> Get(string id)
         {
             var user = await _usersService.GetAsync(id);
@@ -29,6 +33,8 @@ namespace MyDiary.Controllers{
 
             return user;
         }
+
+        [Route("CreateUser")]
         [HttpPost]
         public async Task<ActionResult<User>> CreateUser(User korisnik)
         {
@@ -38,6 +44,8 @@ namespace MyDiary.Controllers{
             else
                 return user;
         }
+
+        [Route("UpdateUser")]
         [HttpPut]
         public async Task<ActionResult<User>> UpdateUser(User korisnik)
         {
@@ -47,6 +55,8 @@ namespace MyDiary.Controllers{
             else
                 return user;
         }
+
+        [Route("DeleteUser/{id}")]
         [HttpDelete]
         public async Task<ActionResult<User>> DeleteAsync(string id)
         {
@@ -66,11 +76,11 @@ namespace MyDiary.Controllers{
             }
         }
         [HttpGet]
-        [Route("prijaviSeNaSajt")]
-        public async Task<ActionResult<User>> prijaviSeNaSajt(string ema,string pass)
+        [Route("prijaviSeNaSajt/{email}/{pass}")]
+        public async Task<ActionResult<User>> prijaviSeNaSajt(string email,string pass)
         {
             var users=await _usersService.GetAsync();
-            var nalog=users.Find(x=>(x.Email==ema&&x.Password==pass));
+            var nalog=users.Find(x=>(x.Email==email&&x.Password==pass));
             if(nalog==null)
                 return NotFound();
             else
