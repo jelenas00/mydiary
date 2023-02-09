@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>MyDiary</title>
+  <title>Read memory - MyDiary</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -45,9 +45,9 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <div class="icon">
-          <i class="bi bi-book" style="font-size: xx-large; margin-right: 20px;"></i>
-        </div>
-        <span class="d-none d-lg-block">MY DIARY</span>
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: xx-large; margin-right: 10px;"></i>
+          </div>
+        <span class="d-none d-lg-block">BACK</span>
       </a>
       
     </div><!-- End Logo -->
@@ -98,52 +98,52 @@
     </div><!-- End Page Title -->
 
     <section class="section">
+    
         <div class="col-lg-10">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: x-large; text-align: center;">Read your memory</h5>
+                    <h5 class="card-title">Pick a date:</h5>
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title" style="font-size: x-large; text-align: center;">Welcome</h5>
-              
-              
-              <div class="row">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-lg-3"> 
+                                <label for="inputDate" class="col-sm-2 col-form-label">Date:</label>
+                                <div>
+                                    <input type="date" name="inputDate" class="form-control" required>
+                                </div>
+                            </div>
 
-                <div class="col-lg-6">
-                  <a href="write-diary.html">
-                    <div class="card">
-                      <img src="assets/img/write-diary.jpg" class="img" style="padding-top: 20px; width: 400px; height: 400px; display: block; margin-left: auto; margin-right: auto;" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Write about today</h5>
-                        <p class="card-text"> Write your thoughts. Write about your dream.</p>
-                      </div>
-                    </div>
-                  </a>
+                            <div class="col-lg-3">
+                                <br>
+                                <div class="col-sm-12" style="padding-top: 13px;">
+                                    <button type="submit" class="btn btn-primary" onclick="showDiv()" style="display: block;">Read memory</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+
                 </div>
-
-                <!-- <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Read previous writting</h5>
-                    <img src="assets/img/read-diary.jpg" class="card-img-top" alt="...">
-                    <div class="col"> Read your memories. Get motivation from past.</div>
-                  </div>
-                </div> -->
-
-                <div class="col-lg-6">
-                  <a href="read-diary.html">
-                    <div class="card">
-                      <img src="assets/img/read-diary.jpg" class="img" style="padding-top: 20px; width: 400px; height: 400px; display: block; margin-left: auto; margin-right: auto;" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Read previous writting</h5>
-                        <p class="card-text">Read your memories. Get motivation from past.</p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-
-              </div>
-              
-             
             </div>
-          </div>
+        </div>
+
+        <div id="read-card" class="col-lg-10" style="display: none;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">On this day</h5>
+                    
+                    <label for="readWeather" class="col-sm-2 col-form-label"> <i class="bi bi-cloud-sun-fill"></i> Weather:</label>
+                    <div class="col-sm-12">
+                        <textarea class="form-control" name="readWeather" style="height: 70px; resize: none;" readonly></textarea>
+                    </div>
+                    
+                    <label for="readText" class="col-sm-2 col-form-label"> <i class="bi bi-book-half"></i> Read:</label>
+                    <div class="col-sm-12">
+                        <textarea class="form-control" name="readText" style="height: 200px" readonly></textarea>
+                    </div>
+
+                </div>
+            </div> 
         </div>
     </section>
 
@@ -166,7 +166,12 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <script>
+    function showDiv()
+    { 
+        document.getElementById("read-card").style.display = "block";
+    }
+  </script>
 </body>
 
 </html>
