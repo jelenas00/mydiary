@@ -1258,3 +1258,29 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+
+
+
+
+
+
+.gfg {
+  position: relative;
+}
+
+
+.first-text {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  background-color: #c0c0c0;
+  font-size: 50px;
+}
+.btn-log {
+  position: absolute;
+}
+
+.slika {
+  width: 100%;
+}
