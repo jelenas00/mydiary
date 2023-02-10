@@ -30,7 +30,18 @@ namespace MyDiary.Controllers{
             {
                 return NotFound();
             }
+            return page;
+        }
+        [Route("GetPageByDate/{date}")]
+        [HttpGet]
+        public async Task<ActionResult<Page>> getPageByDate(string date)
+        {
+            var page = await _pagesService.GetAsyncDate(date);
 
+            if (page is null)
+            {
+                return NotFound();
+            }
             return page;
         }
 

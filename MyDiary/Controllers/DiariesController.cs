@@ -103,5 +103,29 @@ namespace MyDiary.Controllers{
                     return NotFound("incorrect password");
             }          
         }
+        [HttpGet]
+        [Route("getPagesDiary/{idd}")]
+        public async Task<ActionResult<List<Page>>> getPagesDiary(string idd)
+        {
+            var diary=await _diariesService.GetAsync(idd);
+            if(diary==null)
+                return NotFound();
+            else
+            {
+                if(diary.Pages!=null)
+                    {
+                        var listOfPages=new List<Page>();
+                        foreach(var x in diary.Pages)
+                        {
+                            var page=await _pagesService.GetAsync(x);
+                            if(page!=null)
+                                listOfPages.Add(page);
+                        }
+                        return listOfPages;
+                    }
+                else 
+                    return NotFound("incorrect password");
+            }          
+        }
     }
 }

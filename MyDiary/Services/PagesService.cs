@@ -15,6 +15,7 @@ namespace MyDiary.Services{
         }
         public async Task<List<Page>> GetAsync() => await _pagesCollection.Find(_ => true).ToListAsync();
         public async Task<Page?> GetAsync(string id) =>await _pagesCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        public async Task<Page?> GetAsyncDate(string date) =>await _pagesCollection.Find(x => x.Datetime == date).FirstOrDefaultAsync();
          public async Task<Page?> CreateAsync(Page stranice)
         {
             await _pagesCollection.InsertOneAsync(stranice);
