@@ -173,6 +173,60 @@ export class Api{
             }
         }
     }
+    async updateKorisnikEmail(kor){
+
+        let response = await fetch("http://localhost:5022/Users/UpdateUserEmail",
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT",
+            body: JSON.stringify(kor)
+        });
+
+        switch(response.status){
+            case 200: {
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                alert("Postoji korisnik sa to email adresom!")
+                return false;
+            }
+        }
+    }
+    async updateKorisnikUsername(kor){
+
+        let response = await fetch("http://localhost:5022/Users/UpdateUserUsername",
+        {
+            headers:
+            {
+                Accept:"application/json",
+                "Content-type":"application/json",
+            },
+            method:"PUT",
+            body: JSON.stringify(kor)
+        });
+
+        switch(response.status){
+            case 200: {
+                return true;
+            }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                alert("Postoji korisnik s tim username-om");
+                return false;
+            }
+        }
+    }
     //////////////GET
     async getAllUsers()
     {
@@ -373,6 +427,35 @@ export class Api{
                     var el= await response.json();
                     const stranica= new Page(el.id,el.diary,el.feeling,el.weather,el.pageContent,el.datetime);
                     return stranica;
+                }
+            case 400:{
+                console.log(`Client error: ${await response.text()}`);
+                return false;
+            }
+            default:{
+                console.log(`Server error: ${await response.text()}`);
+                return false;
+            }
+        }
+    }
+
+    async getPagesByDate(date)
+    {
+        var list=[]
+        let response= await fetch("http://localhost:5022/Pages/GetPageByDate/"+date, 
+        {
+            method:"GET"
+        });
+        switch(response.status)
+        {
+            case 200:
+                {
+                    var data= await response.json();
+                    data.forEach(el=>{
+                        const stranica= new Page(el.id,el.diary,el.feeling,el.weather,el.pageContent,el.datetime);
+                        list.push(stranica)
+                    })
+                    return list;
                 }
             case 400:{
                 console.log(`Client error: ${await response.text()}`);

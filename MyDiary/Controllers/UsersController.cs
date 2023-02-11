@@ -56,6 +56,28 @@ namespace MyDiary.Controllers{
                 return user;
         }
 
+        [Route("UpdateUserEmail")]
+        [HttpPut]
+        public async Task<ActionResult<User>> UpdateUserEmail(User korisnik)
+        {
+            var user=await _usersService.UpdateEmailAsync(korisnik);
+            if(user==null)
+                return BadRequest("Postoji korisnik sa tom email adresom!");
+            else
+                return user;
+        }
+
+        [Route("UpdateUserUsername")]
+        [HttpPut]
+        public async Task<ActionResult<User>> UpdateUserUsername(User korisnik)
+        {
+            var user=await _usersService.UpdateUsernameAsync(korisnik);
+            if(user==null)
+                return BadRequest("Postoji korisnik sa tim username-om!");
+            else
+                return user;
+        }
+
         [Route("DeleteUser/{id}")]
         [HttpDelete]
         public async Task<ActionResult<User>> DeleteAsync(string id)

@@ -34,7 +34,7 @@ namespace MyDiary.Controllers{
         }
         [Route("GetPageByDate/{date}")]
         [HttpGet]
-        public async Task<ActionResult<Page>> getPageByDate(string date)
+        public async Task<ActionResult<List<Page>>> getPageByDate(string date)
         {
             var page = await _pagesService.GetAsyncDate(date);
 

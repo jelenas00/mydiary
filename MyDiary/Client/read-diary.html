@@ -60,14 +60,14 @@
        
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2" name="nameandlast"></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <h6 name="nameandlast"></h6>
+              </a>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -75,7 +75,7 @@
 
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="index.html">
+              <a class="dropdown-item d-flex align-items-center" href="#" name="odjava">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -105,19 +105,19 @@
                     <h5 class="card-title" style="font-size: x-large; text-align: center;">Read your memory</h5>
                     <h5 class="card-title">Pick a date:</h5>
 
-                    <form action="">
+                    <form action="" onsubmit="return false">
                         <div class="row">
                             <div class="col-lg-3"> 
                                 <label for="inputDate" class="col-sm-2 col-form-label">Date:</label>
                                 <div>
-                                    <input type="date" name="inputDate" class="form-control" required>
+                                    <input type="date" name="inputDate" class="form-control" required id="datum">
                                 </div>
                             </div>
 
                             <div class="col-lg-3">
                                 <br>
                                 <div class="col-sm-12" style="padding-top: 13px;">
-                                    <button type="submit" class="btn btn-primary" onclick="showDiv()" style="display: block;">Read memory</button>
+                                    <button type="submit" class="btn btn-primary" onclick="showDiv()" style="display: block;" id="prikazi">Read memory</button>
                                 </div>
                             </div>
                         </div> 
@@ -131,8 +131,8 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">On this day</h5>
-                    
-                    <label for="readWeather" class="col-sm-2 col-form-label"> <i class="bi bi-cloud-sun-fill"></i> Weather:</label>
+                    <div id="prikazstrana">
+                    <!-- <label for="readWeather" class="col-sm-2 col-form-label"> <i class="bi bi-cloud-sun-fill"></i> Weather:</label>
                     <div class="col-sm-12">
                         <textarea class="form-control" name="readWeather" style="height: 70px; resize: none;" readonly></textarea>
                     </div>
@@ -140,14 +140,15 @@
                     <label for="readText" class="col-sm-2 col-form-label"> <i class="bi bi-book-half"></i> Read:</label>
                     <div class="col-sm-12">
                         <textarea class="form-control" name="readText" style="height: 200px" readonly></textarea>
+                    </div> -->
                     </div>
                     <br>
                     <div class="row">
                       <div class="col-sm-6">
-                        <button type="submit" class="btn btn-primary" style="display: block; margin-left: auto; margin-right: 0;"> ← Previous day</button>
+                        <button type="submit" class="btn btn-primary" style="display: block; margin-left: auto; margin-right: 0;" id="previousday"> ← Previous day</button>
                       </div>
                       <div class="col-sm-6">
-                        <button type="submit" class="btn btn-primary" style="display: block; margin-left: 0; margin-right: auto;">Next day → </button>
+                        <button type="submit" class="btn btn-primary" style="display: block; margin-left: 0; margin-right: auto;" id="nextday">Next day → </button>
                       </div>
                     </div>
                 </div>
@@ -174,6 +175,9 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  
+  <script src="./read-diary.js" type="module"></script>
+  <script src="./logout.js" type="module"></script>
   <script>
     function showDiv()
     { 

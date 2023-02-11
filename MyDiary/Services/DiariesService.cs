@@ -18,7 +18,7 @@ namespace MyDiary.Services{
     
         public async Task<Diary?> CreateAsync(Diary dnevnik)
         {
-            await _diariesCollection.InsertOneAsync(dnevnik);
+           await _diariesCollection.InsertOneAsync(dnevnik);
             return dnevnik;
         }
         public async Task<Diary?> UpdateAsync(Diary dnevnik)
